@@ -51,7 +51,7 @@ public class Board {
 			cell[i].setY(valY);
 			
 			// increase the value of y
-			if(i%x == 3){
+			if(i%x == (x-1)){
 				valY++;
 			}
 		}

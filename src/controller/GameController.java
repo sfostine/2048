@@ -2,10 +2,12 @@ package controller;
 
 import game_2048.Game_2048;
 import gui_2048.GamePanel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
 
 import javax.swing.Timer;
 
@@ -75,9 +77,13 @@ public class GameController implements ActionListener{
 				game.moveLeft(ar);
 			else if(key == e.VK_RIGHT)
 				game.moveRight(ar);
-				
-			game.getBoard().setBoard(ar);
-			update();
+			
+			int [] ar2 = game.retrieve().clone();
+			// if they were no deplacement, don't update the board
+			if (!Arrays.equals(ar, ar2)){
+				game.getBoard().setBoard(ar);
+				update();
+			}
 				
 			
 		}
