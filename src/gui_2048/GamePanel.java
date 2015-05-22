@@ -1,21 +1,22 @@
 package gui_2048;
 
 
+import game_2048.Board;
+
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel{
-	private int rows, columns;
 	Color backG = new Color(0xbbada0);
 	private static GamePanel panel;
+	protected Board b;
+	
 
-	private GamePanel(int r, int c, KeyListener key) {
-		rows = r;
-		columns = c;
+	private GamePanel(KeyListener key) {
+		b = Board.getInstanceOfBoard();
 		this.setPreferredSize(GameFrame.dim);
 		this.setBackground(backG);
 		this.addKeyListener(key);
@@ -23,10 +24,10 @@ public class GamePanel extends JPanel{
 	}
 	
 	// instance of game panel
-	public static GamePanel getGamePanel(int row, int column, KeyListener k)
+	public static GamePanel getGamePanel(KeyListener k)
 	{
 		if(panel == null)
-			panel = new GamePanel(row, column,k);
+			panel = new GamePanel(k);
 		return panel;
 	}
 
@@ -34,28 +35,11 @@ public class GamePanel extends JPanel{
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		paintRectangles(g);
-	}
-	
-	
-	private void paintRectangles(Graphics g)
-	{	
-		for(int i = 0; i < rows; i++)
-		{
-			for(int j = 0; j < columns; j++)
-			{
-				g.setColor(Color.BLUE);
-				g.fillRect(j*50 + 10, i*50 + 10, 40, 40);
-				g.drawString("5", j*50 + 20, i*50+20);
-				
-				
-			}
-		}
+		b.paintRectangles(g);
 	}
 	
 	public void Draw()
 	{
-		repaint();
-		
+		repaint();	
 	}
 }

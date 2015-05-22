@@ -14,8 +14,19 @@ public class Game {
 	 */
 	// game board
 	private Board board;
-	public Game(int sizeX, int sizeY) {
-		board = Board.getInstanceOfBoard(sizeX, sizeY);
+	public static int sizeX, sizeY;
+	public Game(int X, int Y) {
+		sizeX = X;
+		sizeY = Y;
+		this.board = Board.getInstanceOfBoard();
+	}
+	
+	public static int getSizeX() {
+		return sizeX;
+	}
+
+	public static int getSizeY() {
+		return sizeY;
 	}
 	
 	public Board getBoard()

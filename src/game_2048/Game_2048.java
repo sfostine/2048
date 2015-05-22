@@ -11,20 +11,8 @@ public class Game_2048 extends Game {
 	// arraylist to choose an empty cell
 	private ArrayList<Cell> listCell = new ArrayList<Cell>();
 
-	private int sizeX, sizeY;
-
-	public int getSizeX() {
-		return sizeX;
-	}
-
-	public int getSizeY() {
-		return sizeY;
-	}
-
 	public Game_2048(int sizeX, int sizeY) {
 		super(sizeX, sizeY);
-		this.sizeX = sizeX;
-		this.sizeY = sizeY;
 	}
 
 	// set the value of the chosen cell to 2 or 4 to an empty cell
@@ -67,7 +55,7 @@ public class Game_2048 extends Game {
 	
 	// move all the tile to the left
 	public void moveLeft(int [] bigA){
-		int[] partArray = new int[this.sizeX];
+		int[] partArray = new int[sizeX];
 		int track_1 = 0, track_2 = 0;
 		
 		for(int i = 0, n = sizeY; i < n; i++ )
@@ -88,7 +76,7 @@ public class Game_2048 extends Game {
 	
 	// move all the tile to the right
 	public void moveRight(int [] bigA){
-		int[] partArray = new int[this.sizeX];
+		int[] partArray = new int[sizeX];
 		int track_1 = 0, track_2 = 0;
 		
 		for(int i = 0, n = sizeY; i < n; i++ )
@@ -96,23 +84,20 @@ public class Game_2048 extends Game {
 			for(int j = partArray.length-1; j >= 0; j-- )
 			{
 				partArray[j] = bigA[track_1++];
-				//0 0 2 2 = 0 0 2 2
 			}
 			
 			merge(partArray);
-			// 4 0 0 0
 			
 			for(int j = partArray.length-1; j >= 0 ; j--)
 			{
 				bigA[track_2++] = partArray[j];
-				// 0 0 0 4
 			}
 		}
 	}
 	
 	// move all the tile up
 	public void moveUp(int [] bigA){
-		int[] partArray = new int[this.sizeY];
+		int[] partArray = new int[sizeY];
 		
 		
 		for(int i = 0, n = sizeX; i < n; i++ )
@@ -136,7 +121,7 @@ public class Game_2048 extends Game {
 	
 	// move all the tile down
 		public void moveDown(int [] bigA){
-			int[] partArray = new int[this.sizeY];
+			int[] partArray = new int[sizeY];
 			
 			for(int i = 0, n = sizeX; i < n; i++ )
 			{

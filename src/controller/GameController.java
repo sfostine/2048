@@ -2,7 +2,6 @@ package controller;
 
 import game_2048.Game_2048;
 import gui_2048.GamePanel;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -10,38 +9,26 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.Timer;
 
-public class GameController implements Runnable {
+public class GameController implements ActionListener{
 	protected Game_2048 game;
 
 	protected GamePanel panel;
-	private Thread time;
+	private Timer timer;
 
 	public GameController(int x, int y) {
 		game = new Game_2048(x,y);
-		panel = GamePanel.getGamePanel(y, x, new KeyInfo());
+		panel = GamePanel.getGamePanel(new KeyInfo());
 		
-		time = new Thread();
-		time.start();
+		timer = new Timer(50, this);
+		timer.start();
 	}
 	
-	private void update()
-	{
-		
-	}
 	
 	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		panel.Draw();
-		System.out.println("Hello");
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	public void actionPerformed(ActionEvent e) {	
+			panel.Draw();
 	}
+
 	
 	/**
 	 * @return the game
@@ -59,6 +46,7 @@ public class GameController implements Runnable {
 
 	
 	
+	// allow to use arrow on the keyboard
 	private class KeyInfo extends KeyAdapter{
 		
 		private void update()
@@ -90,12 +78,10 @@ public class GameController implements Runnable {
 				
 			game.getBoard().setBoard(ar);
 			update();
-			game.getBoard().printBoard(game.getBoard().getCells(), game.getSizeX());
 				
 			
 		}
 	}
-
 		
 	
 }
