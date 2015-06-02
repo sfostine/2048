@@ -1,9 +1,9 @@
 package main;
-import gui_2048.GameFrame;
+import gui_2048.Home;
 
 public class Main {
 	public static void main(String [] args){
-		GameFrame game = new GameFrame(4,4);
+		Home game = new Home();
 	}
 
 }

@@ -3,6 +3,7 @@ package controller;
 import game_2048.Game_2048;
 import gui_2048.GamePanel;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -13,13 +14,14 @@ import javax.swing.Timer;
 
 public class GameController implements ActionListener{
 	protected Game_2048 game;
-
 	protected GamePanel panel;
+
 	private Timer timer;
 
 	public GameController(int x, int y) {
 		game = new Game_2048(x,y);
 		panel = GamePanel.getGamePanel(new KeyInfo());
+		
 		
 		timer = new Timer(50, this);
 		timer.start();
@@ -28,7 +30,7 @@ public class GameController implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {	
-			panel.Draw();
+		panel.Draw();
 	}
 
 	
