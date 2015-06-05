@@ -1,6 +1,5 @@
 package test;
 
-import static org.junit.Assert.*;
 import game_2048.Game_2048;
 
 import org.junit.Assert;
@@ -28,6 +27,13 @@ public class Game2048Test {
 		int [] ar = {4, 2, 0, 2};
 		int [] result = {4,4,0,0};
 		Assert.assertArrayEquals(g.mergeTest(ar), result);
+	}
+	
+	@Test
+	public void scoreTest() {
+		int [] ar = {8, 0, 8, 8};
+		int result = 16;
+		Assert.assertEquals(g.scoringTest(ar),result);
 	}
 
 }

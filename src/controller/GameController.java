@@ -1,8 +1,8 @@
 package controller;
 
 import game_2048.Game_2048;
-import gui_2048.GamePanel;
-
+import gui_2048.BoardPanel;
+import gui_2048.ScorePanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,15 +14,29 @@ import javax.swing.Timer;
 
 public class GameController implements ActionListener{
 	protected Game_2048 game;
-	protected GamePanel panel;
+	protected BoardPanel boardPanel;
+	protected ScorePanel scorePanel;
+	
+
+
+	private final int SIZECELL = 100;
+	private int widthBoard,widthScore, height;
 
 	private Timer timer;
 
 	public GameController(int x, int y) {
 		game = new Game_2048(x,y);
-		panel = GamePanel.getGamePanel(new KeyInfo());
 		
+		//dimension of the Panel
+		this.widthBoard = x * SIZECELL;
+		this.widthScore = 200;
+		this.height = y * SIZECELL;
 		
+		//initialising the panels
+		boardPanel = BoardPanel.getBoardPanel(new KeyInfo(), widthBoard, height);
+		scorePanel = new ScorePanel(widthScore, height);
+
+		// running the thread
 		timer = new Timer(50, this);
 		timer.start();
 	}
@@ -30,9 +44,9 @@ public class GameController implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {	
-		panel.Draw();
+		boardPanel.Draw();
+		scorePanel.Draw();
 	}
-
 	
 	/**
 	 * @return the game
@@ -44,15 +58,20 @@ public class GameController implements ActionListener{
 	/**
 	 * @return the panel
 	 */
-	public GamePanel getPanel() {
-		return panel;
+	public BoardPanel getPanel() {
+		return boardPanel;
 	}
-
 	
+	/**
+	 * @return the scorePanel
+	 */
+	public ScorePanel getScorePanel() {
+		return scorePanel;
+	}
+		
 	
 	// allow to use arrow on the keyboard
 	private class KeyInfo extends KeyAdapter{
-		
 		private void update()
 		{
 			int emptyCell = game.getCellId();
@@ -68,26 +87,39 @@ public class GameController implements ActionListener{
 		@Override	
 		public void keyPressed(KeyEvent e)
 		{
+			// retrieve a big array from the whole board to process an action
 			int [] ar = game.retrieve().clone();
 			
 			int key = e.getKeyCode();
 			if(key == e.VK_UP)
+			{
 				game.moveUp(ar);
+				System.out.println(game.getScore());
+				//game.resetScore();
+			}
 			else if(key == e.VK_DOWN)
+			{
 				game.moveDown(ar);
-			else if(key == e.VK_LEFT)
+				System.out.println(game.getScore());
+				//game.resetScore();
+			}
+			else if(key == e.VK_LEFT){
 				game.moveLeft(ar);
-			else if(key == e.VK_RIGHT)
+				System.out.println(game.getScore());
+				//game.resetScore();
+			}
+			else if(key == e.VK_RIGHT){
 				game.moveRight(ar);
+				System.out.println(game.getScore());
+			//	game.resetScore();
+			}
 			
 			int [] ar2 = game.retrieve().clone();
 			// if they were no deplacement, don't update the board
 			if (!Arrays.equals(ar, ar2)){
 				game.getBoard().setBoard(ar);
 				update();
-			}
-				
-			
+			}	
 		}
 	}
 		

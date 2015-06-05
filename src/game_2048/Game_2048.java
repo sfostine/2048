@@ -10,6 +10,16 @@ import java.util.Random;
 public class Game_2048 extends Game {
 	// arraylist to choose an empty cell
 	private ArrayList<Cell> listCell = new ArrayList<Cell>();
+	private static int score = 0;
+
+	/**
+	 * @return the score
+	 */
+	public static int getScore() {
+		return score;
+	}
+	
+	
 
 	public Game_2048(int sizeX, int sizeY) {
 		super(sizeX, sizeY);
@@ -65,7 +75,7 @@ public class Game_2048 extends Game {
 				partArray[j] = bigA[track_1++];
 			}
 			
-			merge(partArray);
+			score += merge(partArray);
 			
 			for(int j = 0, m = partArray.length; j < m; j++ )
 			{
@@ -86,7 +96,7 @@ public class Game_2048 extends Game {
 				partArray[j] = bigA[track_1++];
 			}
 			
-			merge(partArray);
+			score += merge(partArray);
 			
 			for(int j = partArray.length-1; j >= 0 ; j--)
 			{
@@ -99,7 +109,6 @@ public class Game_2048 extends Game {
 	public void moveUp(int [] bigA){
 		int[] partArray = new int[sizeY];
 		
-		
 		for(int i = 0, n = sizeX; i < n; i++ )
 		{
 			int track_1 = i, track_2 = i;
@@ -109,7 +118,7 @@ public class Game_2048 extends Game {
 				track_1 += sizeX; 
 			}
 			
-			merge(partArray);
+			score += merge(partArray);
 			
 			for(int j = 0, m = partArray.length; j < m; j++ )
 			{
@@ -117,6 +126,7 @@ public class Game_2048 extends Game {
 				track_2 += sizeX;
 			}
 		}
+		
 	}
 	
 	// move all the tile down
@@ -132,7 +142,7 @@ public class Game_2048 extends Game {
 					track_1 += sizeX; 
 				}
 				
-				merge(partArray);
+				score += merge(partArray);
 				
 				for(int j =  partArray.length-1; j >= 0 ; j-- )
 				{
@@ -144,16 +154,20 @@ public class Game_2048 extends Game {
 
 
 	// merge the array
-	private void mergeHelper(int[] ar) {
+	private int mergeHelper(int[] ar) {
 		int i = 1;
+		int localScore = 0;
 		while(i < ar.length) {
 			if (ar[i] != 0 && ar[i - 1] == ar[i]) {
 				ar[i - 1] *= 2;
 				ar[i] = 0;
+				localScore += ar[i-1];
 			}
 			else
 				i++;
 		}
+	
+		return localScore;
 	}
 
 	// move every non zero to the left of the array
@@ -169,10 +183,12 @@ public class Game_2048 extends Game {
 	}
 
 	// merge the whole array together
-	private void merge(int[] ar) {
+	private int merge(int[] ar) {
 		toLeft(ar);
-		mergeHelper(ar);
+		int localscore = mergeHelper(ar);
 		toLeft(ar);
+		
+		return localscore;
 	}
 
 	/******************** Testing methods ************/
@@ -186,6 +202,12 @@ public class Game_2048 extends Game {
 	public int[] mergeHelperTest(int[] ar) {
 		mergeHelper(ar);
 		return ar;
+	}
+	
+	// test the score returned by the mergeHeler method
+	public int scoringTest(int [] ar)
+	{
+		return merge(ar);
 	}
 
 	// testing purpose of the merge method

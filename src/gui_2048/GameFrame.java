@@ -1,6 +1,9 @@
 package gui_2048;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 import game_2048.Game;
 
@@ -12,34 +15,35 @@ import controller.GameController;
 
 
 public class GameFrame extends JFrame{
-	private final int SIZECELL = 100;
 	protected GameController control;
-	public static int width, height;
 	
-	//JPanel main;
-	public static Dimension dim;
-
-	public GameFrame(int x, int y)  {
+	
+	public GameFrame(int x, int y)
+	{
 		// controller
 		control = new GameController(x,y);
 		
-		// main panel
-		
-		this.add(control.getPanel());
-		
-		
-		// dimension and frame info
-		this.width = Game.getSizeX()*SIZECELL;
-		height = Game.getSizeY()*SIZECELL+20;
-		this.setTitle("Welcome to 2048 game!");
-		dim = new Dimension(width, height);
-		
-		this.setPreferredSize(dim);
+		// some functionalities of frame
 		this.setTitle("2048");
-		this.pack();
-		this.setResizable(false);
-		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+	
+		// add panels to the frame
+		this.getContentPane().add(control.getScorePanel(), BorderLayout.EAST);
+		this.getContentPane().add(control.getPanel(), BorderLayout.CENTER);
+
+		
+		// pack the frame to fit the panels
+		this.pack();
+		
+		// some other functionalities of frame
+		this.setResizable(false);
 		this.setVisible(true);
+	}
+
+	
+	public GameFrame getFrame()
+	{
+		return this;
 	}
 }
