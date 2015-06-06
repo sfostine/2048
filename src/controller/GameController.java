@@ -37,7 +37,7 @@ public class GameController implements ActionListener{
 		scorePanel = new ScorePanel(widthScore, height);
 
 		// running the thread
-		timer = new Timer(50, this);
+		timer = new Timer(100, this);
 		timer.start();
 	}
 	
@@ -92,27 +92,13 @@ public class GameController implements ActionListener{
 			
 			int key = e.getKeyCode();
 			if(key == e.VK_UP)
-			{
 				game.moveUp(ar);
-				System.out.println(game.getScore());
-				//game.resetScore();
-			}
 			else if(key == e.VK_DOWN)
-			{
 				game.moveDown(ar);
-				System.out.println(game.getScore());
-				//game.resetScore();
-			}
-			else if(key == e.VK_LEFT){
+			else if(key == e.VK_LEFT)
 				game.moveLeft(ar);
-				System.out.println(game.getScore());
-				//game.resetScore();
-			}
-			else if(key == e.VK_RIGHT){
+			else if(key == e.VK_RIGHT)
 				game.moveRight(ar);
-				System.out.println(game.getScore());
-			//	game.resetScore();
-			}
 			
 			int [] ar2 = game.retrieve().clone();
 			// if they were no deplacement, don't update the board

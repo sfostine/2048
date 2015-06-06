@@ -95,7 +95,7 @@ public class Board {
 	{
 		switch (value) {
 		case 2:
-			return new Color(0xeee4da);
+			return new Color(0xffffff);
 		case 4:
 			return new Color(0xede0c8);
 		case 8:
@@ -133,19 +133,19 @@ public class Board {
 		case 16:
 			return Color.BLUE;
 		case 32:
-			return Color.BLACK;
+			return Color.PINK;
 		case 64:
-			return Color.ORANGE;
+			return Color.CYAN;
 		case 128:
-			return Color.ORANGE;
+			return Color.WHITE ;
 		case 256:
 			return Color.RED;
 		case 512:
-			return Color.PINK;
-		case 1024:
 			return Color.GREEN;
+		case 1024:
+			return Color.DARK_GRAY;
 		case 2048:
-			return Color.CYAN;
+			return new Color(0xcceeff);
 		}
 		return new Color(0xcdc1b4);
 	}
@@ -157,6 +157,7 @@ public class Board {
 		{
 			
 			int value = cell[i].getValue();
+			
 			// x and y coordinates of the board 
 			int x = cell[i].getX()*100 + 10;
 			int y = cell[i].getY()*100 + 10;
@@ -174,8 +175,16 @@ public class Board {
 			
 			g.setFont(font);
 			
+			int placement = fontSize/3;
+			if(value > 10 && value < 100)
+				placement = fontSize/2 + 3;
+			else if(value > 100 && value < 1000)
+				placement = fontSize;
+			else if(value > 1000)
+				placement = fontSize * 2 - 15;
+			
 			if(value != 0)
-				g.drawString(Integer.toString(value), x + (size/2) - (fontSize/2) , y+ (size/2) + (fontSize/2));
+				g.drawString(Integer.toString(value), x + (size/2) - placement , y+ (size/2) + (fontSize/2));
 		}
 	}
 	

@@ -3,8 +3,6 @@ package gui_2048;
 
 import game_2048.Board;
 import game_2048.Game_2048;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -13,6 +11,10 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Color backG = new Color(0xbbada0);
 	private static BoardPanel panel;
 	protected Board b;

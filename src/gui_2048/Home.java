@@ -26,6 +26,8 @@ public class Home extends JLayeredPane {
 		homeFrame = new JFrame("Welcome to my 2048 game");
 		homeFrame.setSize(size, size);
 		homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		homeFrame.setResizable(false);
+		homeFrame.setLocationRelativeTo(null);
 		
 		// load image of 2048 as background for home using JLabel
 		try {
@@ -109,7 +111,7 @@ public class Home extends JLayeredPane {
 				
 			}
 				
-				GameFrame game = new GameFrame(XValue, YValue);
+				new GameFrame(XValue, YValue);
 	}
 	
 	
