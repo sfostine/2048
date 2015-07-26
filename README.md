@@ -4,7 +4,8 @@ Summer time!!! Creating 2048 game for fun
 This is my own version of 2048 game
 It is flexible to work on any board with a miximum of 11 columns and 7 rows.
 Note that you can play on any board within the range mentioned earlier
-Example of board: 4X4, 7X2, 11X7, 8X6, and so on.
+Example of board: 4X4, 2X1, 3X4, 4X5, and so one.
+What if you don't want to finish the game, you can also try the 11X7.
 
 We have different color for each number using in the game
 
