@@ -8,5 +8,5 @@ Example of board: 4X4, 7X2, 11X7, 8X6, and so on.
 
 We have different color for each number using in the game
 
-Next feature that I'll be working on, is to have the possibility to go to 3 or 5 previous steps
-some other features will be added
+Next feature that I'll be working on, is to have the possibility to go to 3 or 5 previous steps.
+Some other features will be added.
