@@ -14,7 +14,7 @@ public class Game {
 	 */
 	// game board
 	private Board board;
-	public static int sizeX, sizeY;
+	private static int sizeX, sizeY;
 	public Game(int X, int Y) {
 		sizeX = X;
 		sizeY = Y;

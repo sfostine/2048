@@ -111,7 +111,7 @@ public class Home extends JLayeredPane {
 				
 			}
 				
-				new GameFrame(XValue, YValue);
+				GameFrame.getFrame(XValue, YValue);
 	}
 	
 	

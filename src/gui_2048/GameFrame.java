@@ -13,10 +13,11 @@ public class GameFrame extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static GameFrame frame;
 	protected GameController control;
 	
 	
-	public GameFrame(int x, int y)
+	private GameFrame(int x, int y)
 	{
 		// controller
 		control = new GameController(x,y);
@@ -40,8 +41,15 @@ public class GameFrame extends JFrame{
 	}
 
 	
-	public GameFrame getFrame()
+	public  static GameFrame getFrame(int x, int y)
 	{
-		return this;
+		if(frame == null)
+			frame = new GameFrame(x, y);
+		return frame;
+	}
+	
+	public static GameFrame frame()
+	{
+		return frame;
 	}
 }

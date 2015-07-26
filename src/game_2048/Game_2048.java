@@ -57,7 +57,7 @@ public class Game_2048 extends Game {
 	// retrieve the values of the board
 	public int[] retrieve()
 	{
-		int [] arr = new int [sizeX*sizeY];
+		int [] arr = new int [getSizeX()*getSizeY()];
 		for(int i=0, l = arr.length; i < l; i++)
 			arr[i] = this.getBoard().getCells()[i].getValue();
 		return arr;
@@ -65,10 +65,10 @@ public class Game_2048 extends Game {
 	
 	// move all the tile to the left
 	public void moveLeft(int [] bigA){
-		int[] partArray = new int[sizeX];
+		int[] partArray = new int[getSizeX()];
 		int track_1 = 0, track_2 = 0;
 		
-		for(int i = 0, n = sizeY; i < n; i++ )
+		for(int i = 0, n = getSizeY(); i < n; i++ )
 		{
 			for(int j = 0, m = partArray.length; j < m; j++ )
 			{
@@ -86,10 +86,10 @@ public class Game_2048 extends Game {
 	
 	// move all the tile to the right
 	public void moveRight(int [] bigA){
-		int[] partArray = new int[sizeX];
+		int[] partArray = new int[getSizeX()];
 		int track_1 = 0, track_2 = 0;
 		
-		for(int i = 0, n = sizeY; i < n; i++ )
+		for(int i = 0, n = getSizeY(); i < n; i++ )
 		{
 			for(int j = partArray.length-1; j >= 0; j-- )
 			{
@@ -107,15 +107,15 @@ public class Game_2048 extends Game {
 	
 	// move all the tile up
 	public void moveUp(int [] bigA){
-		int[] partArray = new int[sizeY];
+		int[] partArray = new int[getSizeY()];
 		
-		for(int i = 0, n = sizeX; i < n; i++ )
+		for(int i = 0, n = getSizeX(); i < n; i++ )
 		{
 			int track_1 = i, track_2 = i;
 			for(int j = 0, m = partArray.length; j < m; j++ )
 			{
 				partArray[j] = bigA[track_1];
-				track_1 += sizeX; 
+				track_1 += getSizeX(); 
 			}
 			
 			score += merge(partArray);
@@ -123,7 +123,7 @@ public class Game_2048 extends Game {
 			for(int j = 0, m = partArray.length; j < m; j++ )
 			{
 				bigA[track_2] = partArray[j];
-				track_2 += sizeX;
+				track_2 += getSizeX();
 			}
 		}
 		
@@ -131,15 +131,15 @@ public class Game_2048 extends Game {
 	
 	// move all the tile down
 		public void moveDown(int [] bigA){
-			int[] partArray = new int[sizeY];
+			int[] partArray = new int[getSizeY()];
 			
-			for(int i = 0, n = sizeX; i < n; i++ )
+			for(int i = 0, n = getSizeX(); i < n; i++ )
 			{
 				int track_1 = i, track_2 = i;
 				for(int j = partArray.length-1; j >= 0; j-- )
 				{
 					partArray[j] = bigA[track_1];
-					track_1 += sizeX; 
+					track_1 += getSizeX(); 
 				}
 				
 				score += merge(partArray);
@@ -147,7 +147,7 @@ public class Game_2048 extends Game {
 				for(int j =  partArray.length-1; j >= 0 ; j-- )
 				{
 					bigA[track_2] = partArray[j];
-					track_2 += sizeX;
+					track_2 += getSizeX();
 				}
 			}
 		}

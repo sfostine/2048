@@ -1,7 +1,10 @@
 package controller;
 
+import game_2048.Cell;
 import game_2048.Game_2048;
 import gui_2048.BoardPanel;
+import gui_2048.GameFrame;
+import gui_2048.GameOverGUI;
 import gui_2048.ScorePanel;
 
 import java.awt.event.ActionEvent;
@@ -16,6 +19,7 @@ public class GameController implements ActionListener{
 	protected Game_2048 game;
 	protected BoardPanel boardPanel;
 	protected ScorePanel scorePanel;
+	protected boolean gameOver = false;
 	
 
 
@@ -43,7 +47,14 @@ public class GameController implements ActionListener{
 	
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {	
+	public void actionPerformed(ActionEvent e) {
+		if(gameOver)
+		{
+			GameFrame.frame().setVisible(false);
+			GameFrame.frame().dispose();
+			timer.stop();
+			new GameOverGUI(this.widthBoard,this.height);
+		}
 		boardPanel.Draw();
 		scorePanel.Draw();
 	}
@@ -58,7 +69,7 @@ public class GameController implements ActionListener{
 	/**
 	 * @return the panel
 	 */
-	public BoardPanel getPanel() {
+	public BoardPanel getPanel(){
 		return boardPanel;
 	}
 	
@@ -68,7 +79,34 @@ public class GameController implements ActionListener{
 	public ScorePanel getScorePanel() {
 		return scorePanel;
 	}
-		
+	
+
+	private boolean isGameOver(Cell[] cel)
+	{
+	    int firstLines = cel.length - game.getSizeX();
+	    
+	    int sizeX_1 = game.getSizeX()-1;
+	    
+		for(int i = 0; i < cel.length; i++)
+		{
+			// if there is an empty spot, we still can move
+			if(cel[i].getValue() == 0) return false;
+			
+			// check the right value of each cell to see if they are the same
+			// note that we have to check only for the cells that are not in the right corner
+			if((i % game.getSizeX()) != (sizeX_1)){
+				if(cel[i].getValue() == cel[i+1].getValue())
+					return false;
+			}
+			
+			// check the value that is at the bottom of the cel[i] value
+			if(i < firstLines){
+				if(cel[i].getValue() == cel[i+game.getSizeX()].getValue())
+					return false;
+			}
+		}
+		return true;
+	}	
 	
 	// allow to use arrow on the keyboard
 	private class KeyInfo extends KeyAdapter{
@@ -105,9 +143,13 @@ public class GameController implements ActionListener{
 			if (!Arrays.equals(ar, ar2)){
 				game.getBoard().setBoard(ar);
 				update();
-			}	
+			}
+			
+			
+			if(isGameOver(game.getBoard().getCells()))
+			{
+				gameOver = true;
+			}
 		}
 	}
-		
-	
 }
